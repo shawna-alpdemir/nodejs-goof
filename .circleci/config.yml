@@ -1,5 +1,5 @@
 version: 2.1 # use CircleCI 2.0
-orbs:
+orbs: 
     snyk: snyk/snyk@1.1.2
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
@@ -10,36 +10,16 @@ jobs: # a collection of steps
       - checkout # special step to check out source code to working directory
       - run:
           name: update-npm
-          command: ‘sudo npm install -g npm@latest’
+          command: 'sudo npm install -g npm@latest'
       - run:
           name: install-snyk
-          command: ‘sudo npm install -g snyk’
+          command: 'sudo npm install -g snyk'     
       - run: # run snyk help - test snyk is installed and working
           name: snyk-help
           command: snyk --help
       - run: # run snyk auth - authenticate snyk use environment variables to add token
           name: snyk auth
           command: snyk auth $SNYK_TOKEN
-      - run: # run snyk test - run snyk test
-          name: snyk test
-          command: snyk test
-
-
-
-
-
-
-
-
-
-
-
-Message cs-the-force-team
-
-
-
-
-
-
-
-
+      - run: # run snyk test - run snyk monitor
+          name: snyk monitor
+          command: snyk monitor
